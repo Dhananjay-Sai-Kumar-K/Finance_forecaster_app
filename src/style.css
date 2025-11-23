@@ -1,0 +1,63 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(20, 20, 30, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --neon-blue: #00f2ff;
+    --neon-purple: #bc13fe;
+    --neon-green: #0aff60;
+    --neon-red: #ff0a54;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b0;
+}
+
+html,
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+pointer-events: none;
+z-index: 0;
+}
+
+/* 2. Frosted Glass Sidebar */
+[data-testid="stSidebar"] {
+    background-color: rgba(10, 10, 15, 0.3) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-right: 1px solid var(--glass-border);
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.2);
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+/* Info/Alert Boxes */
+.stAlert {
+    background-color: rgba(0, 242, 255, 0.05);
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    color: #ccfbfd;
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

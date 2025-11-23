@@ -1,0 +1,13 @@
+streamlit
+yfinance
+pandas
+numpy
+scikit-learn
+tensorflow
+statsmodels
+gym
+shimmy>=0.2.1
+stable-baselines3
+matplotlib
+plotly
+ta
