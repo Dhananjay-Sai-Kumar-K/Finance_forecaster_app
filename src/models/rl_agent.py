@@ -91,3 +91,27 @@ def train_rl_agent(env, timesteps=10000):
     model = PPO('MlpPolicy', env, verbose=1)
     model.learn(total_timesteps=timesteps)
     return model
+
+def evaluate_agent(model, env):
+    """
+    Evaluates the trained agent and returns the history.
+    """
+    obs, _ = env.reset()
+    history = {
+        'net_worth': [],
+        'actions': [],
+        'price': []
+    }
+    
+    terminated = False
+    truncated = False
+    
+    while not terminated and not truncated:
+        action, _states = model.predict(obs)
+        obs, reward, terminated, truncated, info = env.step(action)
+        
+        history['net_worth'].append(env.net_worth)
+        history['actions'].append(action)
+        history['price'].append(env.df.iloc[env.current_step]['Close'])
+        
+    return history

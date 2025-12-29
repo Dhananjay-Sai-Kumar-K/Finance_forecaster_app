@@ -1,6 +1,8 @@
 import yfinance as yf
 import pandas as pd
+import streamlit as st
 
+@st.cache_data(ttl=600)  # Cache for 10 minutes
 def fetch_data(ticker, period='1y', interval='1d'):
     """
     Fetches historical market data for a given ticker.
@@ -31,6 +33,25 @@ def fetch_data(ticker, period='1y', interval='1d'):
         print(f"Error fetching data for {ticker}: {e}")
         return pd.DataFrame()
 
+@st.cache_data(ttl=60)
+def fetch_live_data(ticker):
+    """Fetches recent data for live mode (cached for 1 min)"""
+    try:
+        data = yf.download(ticker, period='1d', interval='1m', progress=False)
+        if data.empty:
+            return pd.DataFrame()
+            
+        if isinstance(data.columns, pd.MultiIndex):
+            if 'Close' in data.columns.get_level_values(0):
+                data.columns = data.columns.get_level_values(0)
+            elif 'Close' in data.columns.get_level_values(1):
+                data.columns = data.columns.get_level_values(1)
+        return data
+    except Exception as e:
+        print(f"Error fetching live data: {e}")
+        return pd.DataFrame()
+
+@st.cache_data(ttl=60)  # Cache for 1 minute (live prices change frequently)
 def get_latest_price(ticker):
     """
     Fetches the latest available price for a given ticker.

@@ -2,11 +2,12 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from ta.momentum import RSIIndicator
-from ta.trend import MACD
+from ta.trend import MACD, EMAIndicator, SMAIndicator
+from ta.volatility import BollingerBands
 
 def add_technical_indicators(df):
     """
-    Adds technical indicators (RSI, MACD) to the DataFrame.
+    Adds technical indicators (RSI, MACD, Bollinger Bands, EMA, SMA) to the DataFrame.
     """
     df = df.copy()
     # Ensure Close is 1D
@@ -22,6 +23,16 @@ def add_technical_indicators(df):
     macd = MACD(close=close_prices)
     df['MACD'] = macd.macd()
     df['MACD_Signal'] = macd.macd_signal()
+    
+    # Bollinger Bands
+    bb = BollingerBands(close=close_prices, window=20, window_dev=2)
+    df['BB_High'] = bb.bollinger_hband()
+    df['BB_Low'] = bb.bollinger_lband()
+    df['BB_Mid'] = bb.bollinger_mavg()
+    
+    # Moving Averages
+    df['EMA_20'] = EMAIndicator(close=close_prices, window=20).ema_indicator()
+    df['SMA_50'] = SMAIndicator(close=close_prices, window=50).sma_indicator()
     
     df.dropna(inplace=True)
     return df
