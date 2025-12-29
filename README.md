@@ -11,7 +11,7 @@ All dependencies are installed and working correctly.
 1. Open PowerShell/Terminal
 2. Navigate to project directory:
    ```bash
-   cd "e:\Academics\DSK College Activities\projects\Finance_forecaster_app"
+   cd "c:Users\projects\Finance_forecaster_app"
    ```
 3. Run the app:
    ```bash
